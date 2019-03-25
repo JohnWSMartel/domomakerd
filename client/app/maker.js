@@ -60,6 +60,32 @@ const DomoList = function(props) {
 	);
 };
 
+const loadDomosFromServer = () => {
+	sendAjax('GET', '/getDomos', null, (data) =>{
+		ReactDOM.render(
+			<DomoList domos = {data.domos}/>, document.querySelector("#domos)
+		);
+	});
+};
 
+const setup = function(csrf){
+	ReactDOM.render(
+		<DomoForm csrf={csrf} />, document.querySelector("#makeDomo")
+	);
+	
+	ReactDOM.render(
+		<DomoList domos={[]} />, document.querySelector("#domos")
+	);
+	
+	loadDomosFromServer();
+};
 
+const getToken = () => {
+	sendAjax('GET', '/getToken', null, (result) => {
+		setup(result.csrfToken);
+	});
+};
 
+$(document).ready(function(){
+	getToken();
+});
