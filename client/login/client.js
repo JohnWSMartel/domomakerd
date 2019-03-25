@@ -25,5 +25,12 @@ const handleSignup = (e) => {
     return false;
   }
   
+  if($("#pass").val() !== $("#pass2").val()){
+    handleError("RAWR! Passwords do not match");
+    return false;
+  }
   
-}
+  sendAjax('POST', $("#signupForm").attr("action"), $("#signupForm").serialize(), redirect);
+  
+  return false;
+};
