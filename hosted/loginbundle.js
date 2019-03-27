@@ -117,7 +117,7 @@ var setup = function setup(csrf) {
 
   loginButton.addEventListener("click", function (e) {
     e.preventDefault();
-    createLoginWindow(csrf);
+    createloginWindow(csrf);
     return false;
   });
 
